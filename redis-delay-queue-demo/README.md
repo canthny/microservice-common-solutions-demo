@@ -1,6 +1,6 @@
-#redis实现延时队列
+# redis实现延时队列
 
-##存储结构
+## 存储结构
 **1.Hash结构存储消息体**
 
     key：业务标识-topic_hash
@@ -18,7 +18,7 @@
     key：业务标识-topic_blocked_queue
     value：msgId
     
-##流程设计
+## 流程设计
 **RedisDelayQueueProducer延迟消息生产者**
 **RedisDelayQueueScaner延时扫描任务**
 **BusiConsumer业务消息消费者**
