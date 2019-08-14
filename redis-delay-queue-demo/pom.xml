@@ -12,4 +12,10 @@
     <artifactId>redis-delay-queue-demo</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+    </dependencies>
 </project>
