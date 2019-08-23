@@ -14,7 +14,7 @@ public class DelayMsgInfo implements Serializable {
 
     private String msgId;
 
-    private String msgType;
+    private String busiCode;
 
     private String busiObj;
 
@@ -37,7 +37,7 @@ public class DelayMsgInfo implements Serializable {
         return "DelayMsgInfo{" +
                 "topic='" + topic + '\'' +
                 ", msgId='" + msgId + '\'' +
-                ", msgType='" + msgType + '\'' +
+                ", busiCode='" + busiCode + '\'' +
                 ", busiObj='" + busiObj + '\'' +
                 ", status='" + status + '\'' +
                 ", createTime=" + createTime +
@@ -65,12 +65,12 @@ public class DelayMsgInfo implements Serializable {
         this.msgId = msgId;
     }
 
-    public String getMsgType() {
-        return msgType;
+    public String getBusiCode() {
+        return busiCode;
     }
 
-    public void setMsgType(String msgType) {
-        this.msgType = msgType;
+    public void setBusiCode(String busiCode) {
+        this.busiCode = busiCode;
     }
 
     public String getBusiObj() {
