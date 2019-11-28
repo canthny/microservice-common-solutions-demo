@@ -6,6 +6,7 @@
 		<module>redis-delay-queue-demo</module>
 		<module>quartz-demo</module>
 		<module>common-base</module>
+		<module>db-shardingsphere-demo</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -40,6 +41,11 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.58</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 		</dependency>
 	</dependencies>
 
