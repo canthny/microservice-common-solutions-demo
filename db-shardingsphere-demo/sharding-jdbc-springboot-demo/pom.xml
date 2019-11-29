@@ -10,12 +10,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sharding-jdbc-springboot-demo</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <sharding-sphere.version>4.0.0-RC3</sharding-sphere.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.canthny.microservice.common.solutions</groupId>
+            <artifactId>sharding-jdbc-springboot-jpa</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-jdbc-core</artifactId>
@@ -27,13 +34,10 @@
             <version>${sharding-sphere.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+            <version>5.1.42</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -46,8 +50,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
+
+
 </project>
