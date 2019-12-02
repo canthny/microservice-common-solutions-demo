@@ -8,8 +8,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -20,7 +18,7 @@ import java.util.Random;
  */
 public class OrderTest extends BaseTests{
 
-    private String format = "yyyyMMddhhmiss";
+    private String format = "yyyyMMddhhmmss";
 
     @Autowired
     OrderInfoDao orderInfoDao;
@@ -43,6 +41,8 @@ public class OrderTest extends BaseTests{
                 orderGood.setGoodsPrice(goodPrice);
                 orderGood.setOrderNo(orderNo);
                 orderGood.setRemark("商品|"+i+"|"+j);
+                orderGood.setCreatedDate(new Date());
+                orderGood.setModifiedDate(new Date());
                 orderGoodDao.save(orderGood);
                 amount+=goodPrice;
             }
