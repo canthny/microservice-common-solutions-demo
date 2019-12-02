@@ -6,6 +6,7 @@ import com.canthny.shardingsphere.springboot.jpa.entity.OrderGood;
 import com.canthny.shardingsphere.springboot.jpa.entity.OrderInfo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +29,7 @@ public class OrderTest extends BaseTests{
 
     @Test
     @Transactional
+    @Rollback(false)
     public void testInsertOrderInfo(){
         Random random = new Random(1000);
         for(int i = 1;i<4;i++){
