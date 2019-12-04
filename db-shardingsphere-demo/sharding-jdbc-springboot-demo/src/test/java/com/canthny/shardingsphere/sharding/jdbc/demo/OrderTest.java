@@ -10,6 +10,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -30,8 +31,9 @@ public class OrderTest extends BaseTests{
     @Test
     @Transactional
     @Rollback(false)
+    //仅分表
     public void testInsertOrderInfo(){
-        Random random = new Random(1000);
+        Random random = new Random();
         for(int i = 1;i<4;i++){
             String orderNo = getOrderNo(i);
             Long amount = 0L;
@@ -39,7 +41,7 @@ public class OrderTest extends BaseTests{
                 OrderGood orderGood = new OrderGood();
                 orderGood.setGoodsCode("1001");
                 orderGood.setGoodsNum(1);
-                Long goodPrice = random.nextLong();
+                Long goodPrice = (long)random.nextInt(1000);
                 orderGood.setGoodsPrice(goodPrice);
                 orderGood.setOrderNo(orderNo);
                 orderGood.setRemark("商品|"+i+"|"+j);
@@ -67,5 +69,48 @@ public class OrderTest extends BaseTests{
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         String time = sdf.format(new Date());
         return new StringBuilder(time).append(String.format("%06d",i)).toString();
+    }
+
+    @Test
+    @Transactional
+    @Rollback(false)
+    public void testShardingDbAndTables(){
+        Random random = new Random();
+        for(int i = 1;i<100;i++){
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            long timeMillis = calendar.getTimeInMillis();
+            if(timeMillis%2==0){
+                calendar.add(Calendar.YEAR,-1);
+            }
+            Date createDate = calendar.getTime();
+            String orderNo = getOrderNo(i);
+            Long amount = 0L;
+            for(int j=0;j<2;j++){
+                OrderGood orderGood = new OrderGood();
+                orderGood.setGoodsCode("1001");
+                orderGood.setGoodsNum(1);
+                Long goodPrice = (long)random.nextInt(1000);
+                orderGood.setGoodsPrice(goodPrice);
+                orderGood.setOrderNo(orderNo);
+                orderGood.setRemark("商品|"+i+"|"+j);
+                orderGood.setCreatedDate(createDate);
+                orderGood.setModifiedDate(new Date());
+                orderGoodDao.save(orderGood);
+                amount+=goodPrice;
+            }
+            OrderInfo orderInfo = new OrderInfo();
+            orderInfo.setAmount(amount);
+            orderInfo.setBuyerAccountNo("canthnyq8");
+            orderInfo.setCreatedDate(createDate);
+            orderInfo.setModifiedDate(new Date());
+            orderInfo.setOrderNo(orderNo);
+            orderInfo.setOrderStatus(1);
+            orderInfo.setOrderTitle("随机订单"+i);
+            orderInfo.setOrderType(1);
+            orderInfo.setRemark("备注一下");
+            orderInfo.setSellerAccountNo("JDJR");
+            orderInfoDao.save(orderInfo);
+        }
     }
 }
