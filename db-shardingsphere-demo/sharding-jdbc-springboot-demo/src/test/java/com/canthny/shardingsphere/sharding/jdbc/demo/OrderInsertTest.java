@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.Random;
 
 /**
- * Description： 订单测试类
+ * Description： 订单创建测试类
  * Created By tanghao on 2019/11/29
  */
 public class OrderInsertTest extends BaseTests{
