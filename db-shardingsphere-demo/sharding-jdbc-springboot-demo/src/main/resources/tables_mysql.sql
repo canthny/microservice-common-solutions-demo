@@ -2,6 +2,7 @@ create table pt_order_info_0
 (
     id bigint auto_increment comment '主键'
         primary key,
+    user_id bigint not null comment '用户标识id',
     order_no varchar(64) not null comment '交易单号',
     buyer_account_no varchar(64) null comment '买家账号',
     seller_account_no varchar(64) null comment '卖家账号',
@@ -18,14 +19,15 @@ create table pt_order_info_0
 create index idx_order_info_no_0
     on pt_order_info_0 (order_no);
 
-create index idx_order_info_buyer_0
-    on pt_order_info_0 (buyer_account_no);
+create index idx_order_info_user_0
+    on pt_order_info_0 (user_id);
 
 
 create table pt_order_info_1
 (
     id bigint auto_increment comment '主键'
         primary key,
+    user_id bigint not null comment '用户标识id',
     order_no varchar(64) not null comment '交易单号',
     buyer_account_no varchar(64) not null comment '买家账号',
     seller_account_no varchar(64) not null comment '卖家账号',
@@ -42,8 +44,8 @@ create table pt_order_info_1
 create index idx_order_info_no_1
     on pt_order_info_1 (order_no);
 
-create index idx_order_info_buyer_1
-    on pt_order_info_1 (buyer_account_no);
+create index idx_order_info_user_1
+    on pt_order_info_1 (user_id);
 
 
 create table pt_order_goods_0

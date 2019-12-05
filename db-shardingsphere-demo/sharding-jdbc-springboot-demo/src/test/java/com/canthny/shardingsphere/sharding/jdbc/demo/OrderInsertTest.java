@@ -18,7 +18,7 @@ import java.util.Random;
  * Description： 订单测试类
  * Created By tanghao on 2019/11/29
  */
-public class OrderTest extends BaseTests{
+public class OrderInsertTest extends BaseTests{
 
     private String format = "yyyyMMddhhmmss";
 
@@ -31,52 +31,9 @@ public class OrderTest extends BaseTests{
     @Test
     @Transactional
     @Rollback(false)
-    //仅分表
     public void testInsertOrderInfo(){
         Random random = new Random();
-        for(int i = 1;i<4;i++){
-            String orderNo = getOrderNo(i);
-            Long amount = 0L;
-            for(int j=0;j<2;j++){
-                OrderGood orderGood = new OrderGood();
-                orderGood.setGoodsCode("1001");
-                orderGood.setGoodsNum(1);
-                Long goodPrice = (long)random.nextInt(1000);
-                orderGood.setGoodsPrice(goodPrice);
-                orderGood.setOrderNo(orderNo);
-                orderGood.setRemark("商品|"+i+"|"+j);
-                orderGood.setCreatedDate(new Date());
-                orderGood.setModifiedDate(new Date());
-                orderGoodDao.save(orderGood);
-                amount+=goodPrice;
-            }
-            OrderInfo orderInfo = new OrderInfo();
-            orderInfo.setAmount(amount);
-            orderInfo.setBuyerAccountNo("canthnyq8");
-            orderInfo.setCreatedDate(new Date());
-            orderInfo.setModifiedDate(new Date());
-            orderInfo.setOrderNo(orderNo);
-            orderInfo.setOrderStatus(1);
-            orderInfo.setOrderTitle("随机订单"+i);
-            orderInfo.setOrderType(1);
-            orderInfo.setRemark("备注一下");
-            orderInfo.setSellerAccountNo("JDJR");
-            orderInfoDao.save(orderInfo);
-        }
-    }
-
-    private String getOrderNo(int i){
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        String time = sdf.format(new Date());
-        return new StringBuilder(time).append(String.format("%06d",i)).toString();
-    }
-
-    @Test
-    @Transactional
-    @Rollback(false)
-    public void testShardingDbAndTables(){
-        Random random = new Random();
-        for(int i = 1;i<100;i++){
+        for(int i = 1;i<10;i++){
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             long timeMillis = calendar.getTimeInMillis();
@@ -84,7 +41,8 @@ public class OrderTest extends BaseTests{
                 calendar.add(Calendar.YEAR,-1);
             }
             Date createDate = calendar.getTime();
-            String orderNo = getOrderNo(i);
+            Long userId = (long)random.nextInt(100);
+            String orderNo = getOrderNo(i,userId);
             Long amount = 0L;
             for(int j=0;j<2;j++){
                 OrderGood orderGood = new OrderGood();
@@ -100,6 +58,7 @@ public class OrderTest extends BaseTests{
                 amount+=goodPrice;
             }
             OrderInfo orderInfo = new OrderInfo();
+            orderInfo.setUserId(userId);
             orderInfo.setAmount(amount);
             orderInfo.setBuyerAccountNo("canthnyq8");
             orderInfo.setCreatedDate(createDate);
@@ -112,5 +71,13 @@ public class OrderTest extends BaseTests{
             orderInfo.setSellerAccountNo("JDJR");
             orderInfoDao.save(orderInfo);
         }
+    }
+
+    private String getOrderNo(int i,Long uid){
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        String time = sdf.format(new Date());
+        String userId = String.valueOf(uid);
+        String uidSubStr = userId.length() <= 3 ? userId : userId.substring(userId.length()-3,userId.length());
+        return new StringBuilder(time).append(String.format("%06d",i)).append(String.format("%03d",Integer.parseInt(uidSubStr))).toString();
     }
 }

@@ -19,6 +19,8 @@ import javax.persistence.Table;
 public class OrderInfo extends BaseEntity{
     private static final long serialVersionUID = -4017626139614461152L;
 
+    private Long userId;
+
     private String orderNo;
 
     private String buyerAccountNo;
