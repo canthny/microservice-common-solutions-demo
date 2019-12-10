@@ -39,10 +39,19 @@ public class BaseResponse implements Serializable {
         this.content = content;
     }
 
-    public static BaseResponse buildSuccessReponse(){
+    public boolean isSuccess(){
+        return RespEnum.SUCCESS.getCode().equals(this.getCode());
+    }
+
+    public static BaseResponse buildResponse(RespEnum resEnum) {
+        return buildResponse(resEnum,null);
+    }
+
+    public static BaseResponse buildResponse(RespEnum resEnum,String content) {
         BaseResponse response = new BaseResponse();
-        response.setCode("0000");
-        response.setMsg("成功");
+        response.setCode(resEnum.getCode());
+        response.setMsg(resEnum.getDesc());
+        response.setContent(content);
         return response;
     }
 }
