@@ -21,6 +21,6 @@ public class RedisNodesEventListener {
     public void startListener(RedisNode master){
         redisNodes.add(master);
         Jedis jedisToMaster = new Jedis(master.getHost(),master.getPort());
-        jedisToMaster.info("Replication");
+        String replicationInfo = jedisToMaster.info("Replication");
     }
 }
