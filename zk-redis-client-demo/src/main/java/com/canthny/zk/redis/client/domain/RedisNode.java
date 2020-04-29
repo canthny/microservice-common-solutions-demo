@@ -18,6 +18,12 @@ public class RedisNode {
 
     }
 
+    public RedisNode(String host,int port){
+        this.host = host;
+        this.port = port;
+        this.role = null;
+    }
+
     public RedisNode(String host,int port,RedisNodeRuleEnum role){
         this.host = host;
         this.port = port;
