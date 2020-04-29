@@ -64,4 +64,8 @@ public class RedisNode {
         String host = nodeIpPort[0].trim();
         return new RedisNode(host,port,RedisNodeRuleEnum.MASTER);
     }
+
+    public String getRedisConnectStr(){
+        return new StringBuilder(this.host).append(":").append(this.port).toString();
+    }
 }
