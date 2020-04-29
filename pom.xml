@@ -8,8 +8,6 @@
 		<module>common-base</module>
 		<module>db-shardingsphere-demo</module>
 		<module>distribute-lock-demo</module>
-		<module>distribute-transaction-demo</module>
-		<module>zk-redis-client-demo</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -37,6 +35,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
