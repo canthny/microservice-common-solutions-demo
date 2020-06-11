@@ -10,3 +10,5 @@
     --找到新的主节点后将host、port写入zk中的redis-master节点；
     --监听Watcher会发现zk的Node内容更新，从而切换当前redis客户端的连接，指向最新的master；
     --主从切换期间无法读写数据，待整个故障转移结束，回复主节点读写；
+    
+##第二版，拆分redis中间件
