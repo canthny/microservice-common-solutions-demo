@@ -13,11 +13,8 @@ import java.util.List;
 @Data
 public class PetInfo {
 
-    @Field(name = "pet_id")
     private String petId;
-    @Field(name = "pet_name")
     private String petName;
-    @Field(name = "pet_labels")
     private List<String> petLabels;
 
     @Field(name = "pet_user_relations",type = FieldType.Nested)

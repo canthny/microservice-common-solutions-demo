@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.canthny.es.data.design.domain.TestInfo;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
@@ -22,6 +24,9 @@ public class SimpleQueryTest extends BaseTests{
 
     @Resource
     ElasticsearchTemplate elasticsearchTemplate;
+
+    @Autowired
+    private ElasticsearchOperations operations;
 
     @Test
     public void testTerm(){

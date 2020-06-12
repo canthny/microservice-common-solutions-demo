@@ -1,7 +1,6 @@
 package com.canthny.es.data.design.domain;
 
 import lombok.Data;
-import org.springframework.data.elasticsearch.annotations.Field;
 
 /**
  * Description： TODO
@@ -10,10 +9,7 @@ import org.springframework.data.elasticsearch.annotations.Field;
 @Data
 public class PetUserInfo {
 
-    @Field(name = "user_id")
     private String userId;
-    @Field(name = "user_name")
     private String userName;
-    @Field(name = "user_phone")
     private String userPhone;
 }

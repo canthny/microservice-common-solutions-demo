@@ -15,10 +15,8 @@ import java.util.List;
 @Document(indexName = "pet_shop",type = "pet_shop_all")
 public class PetShopInfo {
 
-    @Field(name = "pet_shop_id")
     private String petShopId;
 
-    @Field(name = "pet_shop_name")
     private String petShopName;
 
     @Field(name = "pets", type = FieldType.Nested)
