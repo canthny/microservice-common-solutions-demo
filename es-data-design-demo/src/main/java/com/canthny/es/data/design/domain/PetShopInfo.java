@@ -1,5 +1,6 @@
 package com.canthny.es.data.design.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -15,10 +16,12 @@ import java.util.List;
 @Document(indexName = "pet_shop",type = "pet_shop_all")
 public class PetShopInfo {
 
+    @JsonProperty(value = "pet_shop_id")
     private String petShopId;
 
+    @JsonProperty(value = "pet_shop_name")
     private String petShopName;
 
-    @Field(name = "pets", type = FieldType.Nested)
-    private List<PetInfo> pets;
+    @Field( type = FieldType.Nested)
+    private List<Pet> pets;
 }

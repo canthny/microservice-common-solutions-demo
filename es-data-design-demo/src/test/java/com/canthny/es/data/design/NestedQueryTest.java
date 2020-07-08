@@ -1,19 +1,21 @@
 package com.canthny.es.data.design;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.canthny.es.data.design.domain.PetInfo;
 import com.canthny.es.data.design.domain.PetShopInfo;
-import com.canthny.es.data.design.domain.TestInfo;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.junit.Test;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 import javax.annotation.Resource;
+
 import java.util.List;
+
+import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
+import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 
 /**
  * Description： TODO
@@ -29,7 +31,7 @@ public class NestedQueryTest extends BaseTests{
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(
                 boolQuery()
                 .must(QueryBuilders.nestedQuery("pets.pet_user_relations",
-                        QueryBuilders.boolQuery()
+                        boolQuery()
                         .must(matchQuery("pets.pet_user_relations.user_id","001"))
                         .must(matchQuery("pets.pet_user_relations.user_name","主人一")), ScoreMode.None))
                 .must(matchQuery("pet_shop_name","歹"))

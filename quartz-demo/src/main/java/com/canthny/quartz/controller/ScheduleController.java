@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "任务调度接口")
 public class ScheduleController {
 
-    @PostMapping
-    public BaseResponse addNewJob(){
+//    @PostMapping
+//    public BaseResponse addNewJob(){
 
-        return BaseResponse.buildSuccessReponse();
-    }
+//        return BaseResponse.buildSuccessReponse();
+//    }
 
     @GetMapping
     public void getJobList(){
