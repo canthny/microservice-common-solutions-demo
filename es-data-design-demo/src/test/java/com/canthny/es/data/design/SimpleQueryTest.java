@@ -38,14 +38,14 @@ public class SimpleQueryTest extends BaseTests{
     @Test
     public void testBoolQuery(){
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.boolQuery()
-                .must(termQuery("name","tanghao"))
+//                .must(matchQuery("name","t"))
                 .must(rangeQuery("age").lte(18))
                 //用户查询几个关键词中间有slop（间隔数<=slop）的情况
                 .must(matchPhraseQuery("userLabel","smart clever").slop(1))
                 //用于即时搜索，标签为smart h开头的结果，并且限制符合条件的按字典排序后的数量
                 //如果有smart ha、smart hc、smart hz等标签，maxExpansions是1，则只能查出smart ha和smart hc的两条，hz的查不到
-                .must(matchPhrasePrefixQuery("userLabel","smart h").maxExpansions(2))
-                .must(multiMatchQuery("smart","name","userLabel"))
+                .must(matchPhrasePrefixQuery("userLabel","smart h").maxExpansions(1))
+                .must(multiMatchQuery("clever","name","userLabel"))
         ).withRoute("1").build();
         List<TestInfo> testInfoList = elasticsearchTemplate.queryForList(searchQuery, TestInfo.class);
         testInfoList.forEach((testInfo)->System.out.println(JSONObject.toJSONString(testInfo)));

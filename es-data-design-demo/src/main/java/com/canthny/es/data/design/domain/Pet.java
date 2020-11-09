@@ -18,6 +18,8 @@ public class Pet {
     private String petId;
     @JsonProperty(value = "pet_name")
     private String petName;
+    @JsonProperty(value = "pet_price")
+    private String petPrice;
     @JsonProperty(value = "pet_labels")
     private List<String> petLabels;
     @JsonProperty(value = "pet_user_relations")

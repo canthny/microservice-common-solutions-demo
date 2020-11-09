@@ -14,8 +14,7 @@ import javax.annotation.Resource;
 
 import java.util.List;
 
-import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
-import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Description： TODO
@@ -33,8 +32,10 @@ public class NestedQueryTest extends BaseTests{
                 .must(QueryBuilders.nestedQuery("pets.pet_user_relations",
                         boolQuery()
                         .must(matchQuery("pets.pet_user_relations.user_id","001"))
-                        .must(matchQuery("pets.pet_user_relations.user_name","主人一")), ScoreMode.None))
+                        .must(matchQuery("pets.pet_user_relations.user_name.keyword","主人一")), ScoreMode.None))
                 .must(matchQuery("pet_shop_name","歹"))
+                .must(QueryBuilders.nestedQuery("pets",
+                        boolQuery().must(rangeQuery("pets.pet_price").lte(9)), ScoreMode.None))
         ).build();
         List<PetShopInfo> petShopInfos = elasticsearchTemplate.queryForList(searchQuery, PetShopInfo.class);
         petShopInfos.forEach((petShopInfo)->System.out.println(JSONObject.toJSONString(petShopInfo)));
