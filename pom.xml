@@ -10,9 +10,9 @@
 		<module>distribute-lock-demo</module>
 		<module>distribute-transaction-demo</module>
 		<module>zk-redis-client-demo</module>
-        <module>es-data-design-demo</module>
 		<module>mysql-es-data-center</module>
-	</modules>
+        <module>all-in-one-pay-system</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -52,4 +52,29 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<!--<repository>-->
+		<!--<id>spring-milestones</id>-->
+		<!--<name>Spring Milestones</name>-->
+		<!--<url>https://repo.spring.io/milestone</url>-->
+		<!--<snapshots>-->
+		<!--<enabled>false</enabled>-->
+		<!--</snapshots>-->
+		<!--</repository>-->
+		<repository>
+			<id>nexus-aliyun</id>
+			<name>Nexus aliyun</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
 </project>

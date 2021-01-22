@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: account-center-provider
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848 # nacos的服务端地址
+        file-extension: yaml # 配置文件格式
+  profiles:
+    active: dev

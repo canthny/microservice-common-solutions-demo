@@ -9,11 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>distribute-transaction-demo</artifactId>
+    <artifactId>all-in-one-pay-system</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>seata-demo</module>
-        <module>message-table-solution-demo</module>
+        <module>account-center</module>
+        <module>order-center</module>
+        <module>common-gateway</module>
+        <module>trade-center</module>
     </modules>
+
 
 </project>
